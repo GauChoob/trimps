@@ -1,8 +1,12 @@
 // don't forget to add jquery
 // https://code.jquery.com/jquery-3.7.1.min.js
 
-// thingColorCanNotAfford
-// thingColorCanAfford
+window.botparam = {
+    house_weight: 1,
+    storage_night: false,
+    gem_value: 5,
+}
+
 window.bot = {
     readTime: function(duration) {
         if(!duration) return 365*24*3600 // No value = infinity sometimes
@@ -42,7 +46,7 @@ window.bot = {
     get_resource: function(resource_name) {
         return window.game.resources[resource_name]
     },
-    search_purchase: function(purchase_name) {
+    search_storage: function(purchase_name) {
         obj = $(`#${purchase_name}`)
         if(obj.length === 0) return false
 
@@ -51,15 +55,41 @@ window.bot = {
 
         return ret
     },
+    get_building: function(name) {
+        return window.game.buildings[name]
+    },
+    get_thing_cost: function(costs, purchased) {
+        const ret = {}
+        Object.entries(costs).forEach(([name,cost]) => {
+            if(cost instanceof Function) ret[name] = cost()
+            else if(isNaN(cost)) ret[name] = cost[0]*cost[1]**purchased
+            else ret[name] = cost
+        })
+        return ret
+    },
+    search_house: function(purchase_name) {
+        obj = $(`#${purchase_name}`)
+        if(obj.length === 0) return false
+
+        ret = {}
+        ret.name = purchase_name
+        ret.affordable = obj.hasClass('thingColorCanAfford')
+        building = this.get_building(purchase_name)
+        ret.cost = this.get_thing_cost(building.cost, building.purchased)
+        ret.housing = building.increase.by
+        ret.estimated_total_cost = (ret.cost.food ?? 0) + (ret.cost.wood ?? 0) + (ret.cost.metal ?? 0) + window.botparam.gem_value*(ret.cost.gems ?? 0)
+        ret.resources_per_housing = ret.estimated_total_cost/ret.housing
+        return ret
+    },
 
     check_storage: function() {
-        let storage_data = {
+        const storage_data = {
             food: {building: 'Barn'},
             wood: {building: 'Shed'},
             metal: {building: 'Forge'},
         }
         Object.entries(storage_data).forEach(([k, v]) => {
-            purchase = this.search_purchase(v.building)
+            purchase = this.search_storage(v.building)
             if(!purchase) return // Barn/Shed/Forge not found
             affordable = purchase.affordable
             resource = this.get_resource(k)
@@ -77,9 +107,21 @@ window.bot = {
                 $(`#${v.building}`).click()
             }
         })
-
-
     },
+
+    check_housing: function(){
+        const house_names = ['Hut', 'House', 'Mansion', 'Hotel']
+        let houses = []
+        house_names.map(name => {
+            house = this.search_house(name)
+            if(house) houses.push(house)
+        })
+        houses.sort((a, b) => a.resources_per_housing - b.resources_per_housing)
+        houses.map(house => {
+            console.log(`${house.name}: ${Math.log10(house.resources_per_housing)}`)
+        })
+    },
+
     bot_loop: function() {
         if(!window.bot_activated) return
         try {
@@ -87,6 +129,7 @@ window.bot = {
     
             console.log('BotLoop')
             this.check_storage()
+            this.check_housing()
             setTimeout(function() {window.bot.bot_loop()}.bind(window.bot), 1000)
         } catch(err) {
             this.disable()
