@@ -16,11 +16,11 @@ window.bot = {
         return window.game.resources[resource_name]
     },
     search_storage: function(purchase_name) {
-        obj = $(`#${purchase_name}`)
-        if(obj.length === 0) return false
+        obj = document.getElementById(purchase_name)
+        if(!obj) return false
 
         ret = {}
-        ret.affordable = obj.hasClass('thingColorCanAfford')
+        ret.affordable = obj.classList.contains('thingColorCanAfford')
 
         return ret
     },
@@ -37,12 +37,12 @@ window.bot = {
         return ret
     },
     search_house: function(purchase_name) {
-        obj = $(`#${purchase_name}`)
-        if(obj.length === 0) return false
+        obj = document.getElementById(purchase_name)
+        if(!obj) return false
 
         ret = {}
         ret.name = purchase_name
-        ret.affordable = obj.hasClass('thingColorCanAfford')
+        ret.affordable = obj.classList.contains('thingColorCanAfford')
         building = this.get_building(purchase_name)
         ret.cost = this.get_thing_cost(building.cost, building.purchased)
         ret.housing = building.increase.by
@@ -62,18 +62,18 @@ window.bot = {
             if(!purchase) return // Barn/Shed/Forge not found
             affordable = purchase.affordable
             resource = this.get_resource(k)
-            time_to_max = window.bothelper.readTime($(`#${k}TimeToFill`).text())
+            time_to_max = window.bothelper.readTime(document.getElementById(`#${k}TimeToFill`).textcontent)
             // Buy to get 8 hours of storage if planning for overnight
             if(window.botparam.storage_night) {
                 if(affordable && time_to_max < 8*3600) {
                     console.log(`Click ${v.building}`)
-                    $(`#${v.building}`).click()
+                    document.getElementById(v.building).click()
                 }
             }
             // Buy before hitting cap
             if(resource.owned/resource.max > 0.8) {
                 console.log(`Click ${v.building}`)
-                $(`#${v.building}`).click()
+                document.getElementById(v.building).click()
             }
         })
     },
@@ -93,6 +93,7 @@ window.bot = {
 
     buy_upgrades: function(){
         const upgrade_names = ['Axeidic', 'Battle', 'Bestplate', 'Blockmaster', 'Bloodlust', 'Bootboost', 'Bounty', 'Coordination', 'Dagadder', 'Efficiency', 'Egg', 'Explorers', 'Greatersword', 'Gymystic', 'Hellishment', 'Megamace', 'Miners', 'Pantastic', 'Polierarm', 'Potency', 'Scientists', 'Smoldershoulder', 'Speedfarming', 'Speedlumber', 'Speedminer', 'Speedscience', 'Supershield', 'TrainTacular', 'Trainers', 'Trapstorm', 'UberHut']
+        // TODO remove jquery
         $('#upgradesHere div').each((i, elem) => {
             if(!upgrade_names.includes(elem.id)) return
             if(!elem.classList.contains('thingColorCanAfford')) return

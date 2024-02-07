@@ -134,7 +134,7 @@ window.bot = {
     },
 
     buy_upgrades: function(){
-        const upgrade_names = ['Axeidic', 'Battle', 'Bestplate', 'Blockmaster', 'Bloodlust', 'Bootboost', 'Bounty', 'Coordination', 'Dagadder', 'Efficiency', 'Egg', 'Explorers', 'Greatersword', 'Gymystic', 'Hellishment', 'Megamace', 'Miners', 'Pantastic', 'Polierarm', 'Potency', 'Scientists', 'Smoldershoulder', 'Speedfarming', 'Speedlumber', 'Speedminer', 'Speedscience', 'Supershield', 'TrainTacular', 'Trainers', 'Trapstorm', 'UberHut']
+        const upgrade_names = ['Axeidic', 'Battle', 'Bestplate', 'Blockmaster', 'Bloodlust', 'Bootboost', 'Bounty', 'Coordination', 'Dagadder', 'Efficiency', 'Egg', 'Explorers', 'Greatersword', 'Gymystic', 'Hellishmet', 'Megamace', 'Miners', 'Pantastic', 'Polierarm', 'Potency', 'Scientists', 'Smoldershoulder', 'Speedfarming', 'Speedlumber', 'Speedminer', 'Speedscience', 'Supershield', 'TrainTacular', 'Trainers', 'Trapstorm', 'UberHut']
         $('#upgradesHere div').each((i, elem) => {
             if(!upgrade_names.includes(elem.id)) return
             if(!elem.classList.contains('thingColorCanAfford')) return
