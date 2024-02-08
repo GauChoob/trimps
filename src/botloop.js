@@ -92,7 +92,7 @@ window.bot = {
     },
 
     buy_upgrades: function(){
-        const upgrade_names = ['Axeidic', 'Battle', 'Bestplate', 'Blockmaster', 'Bloodlust', 'Bootboost', 'Bounty', 'Coordination', 'Dagadder', 'Efficiency', 'Egg', 'Explorers', 'Greatersword', 'Gymystic', 'Hellishmet', 'Megamace', 'Miners', 'Pantastic', 'Polierarm', 'Potency', 'Scientists', 'Smoldershoulder', 'Speedfarming', 'Speedlumber', 'Speedminer', 'Speedscience', 'Supershield', 'TrainTacular', 'Trainers', 'Trapstorm', 'UberHut']
+        const upgrade_names = ['Axeidic', 'Battle', 'Bestplate', 'Blockmaster', 'Bloodlust', 'Bootboost', 'Bounty', 'Coordination', 'Dagadder', 'Efficiency', 'Egg', 'Explorers', 'Greatersword', 'Gymystic', 'Hellishmet', 'Megamace', 'Miners', 'Pantastic', 'Polierarm', 'Potency', 'Scientists', 'Smoldershoulder', 'Speedexplorer', 'Speedfarming', 'Speedlumber', 'Speedminer', 'Speedscience', 'Supershield', 'TrainTacular', 'Trainers', 'Trapstorm', 'UberHut']
         const upgrades = document.getElementById('upgradesHere').children
         for(const upgrade of upgrades) {
             if(!upgrade_names.includes(upgrade.id)) return
