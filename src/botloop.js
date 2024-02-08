@@ -62,7 +62,7 @@ window.bot = {
             if(!purchase) return // Barn/Shed/Forge not found
             affordable = purchase.affordable
             resource = this.get_resource(k)
-            time_to_max = window.bothelper.readTime(document.getElementById(`#${k}TimeToFill`).textcontent)
+            time_to_max = window.bothelper.readTime(document.getElementById(`${k}TimeToFill`).textcontent)
             // Buy to get 8 hours of storage if planning for overnight
             if(window.botparam.storage_night) {
                 if(affordable && time_to_max < 8*3600) {
@@ -92,14 +92,15 @@ window.bot = {
     },
 
     buy_upgrades: function(){
-        const upgrade_names = ['Axeidic', 'Battle', 'Bestplate', 'Blockmaster', 'Bloodlust', 'Bootboost', 'Bounty', 'Coordination', 'Dagadder', 'Efficiency', 'Egg', 'Explorers', 'Greatersword', 'Gymystic', 'Hellishment', 'Megamace', 'Miners', 'Pantastic', 'Polierarm', 'Potency', 'Scientists', 'Smoldershoulder', 'Speedfarming', 'Speedlumber', 'Speedminer', 'Speedscience', 'Supershield', 'TrainTacular', 'Trainers', 'Trapstorm', 'UberHut']
-        // TODO remove jquery
-        $('#upgradesHere div').each((i, elem) => {
-            if(!upgrade_names.includes(elem.id)) return
-            if(!elem.classList.contains('thingColorCanAfford')) return
-            console.log(`Click ${elem.id}`)
-            elem.click()
-        })
+        const upgrade_names = ['Axeidic', 'Battle', 'Bestplate', 'Blockmaster', 'Bloodlust', 'Bootboost', 'Bounty', 'Coordination', 'Dagadder', 'Efficiency', 'Egg', 'Explorers', 'Greatersword', 'Gymystic', 'Hellishmet', 'Megamace', 'Miners', 'Pantastic', 'Polierarm', 'Potency', 'Scientists', 'Smoldershoulder', 'Speedfarming', 'Speedlumber', 'Speedminer', 'Speedscience', 'Supershield', 'TrainTacular', 'Trainers', 'Trapstorm', 'UberHut']
+        const upgrades = document.getElementById('upgradesHere').children
+        for(const upgrade of upgrades) {
+            if(!upgrade_names.includes(upgrade.id)) return
+            if(!upgrade.classList.contains('thingColorCanAfford')) return
+            console.log(`Click ${upgrade.id}`)
+            upgrade.click()
+
+        }
     },
 
     bot_loop: function() {
