@@ -129,11 +129,11 @@ window.bot = {
     },
 
     buy_upgrades: function(){
-        const upgrade_names = ['Axeidic', 'Battle', 'Bestplate', 'Blockmaster', 'Bloodlust', 'Bootboost', 'Bounty', 'Coordination', 'Dagadder', 'Efficiency', 'Egg', 'Explorers', 'Greatersword', 'Gymystic', 'Hellishment', 'Megamace', 'Miners', 'Pantastic', 'Polierarm', 'Potency', 'Scientists', 'Smoldershoulder', 'Speedfarming', 'Speedlumber', 'Speedminer', 'Speedscience', 'Supershield', 'TrainTacular', 'Trainers', 'Trapstorm', 'UberHut']
+        const upgrade_names = ['Axeidic', 'Battle', 'Bestplate', 'Blockmaster', 'Bloodlust', 'Bootboost', 'Bounty', 'Coordination', 'Dagadder', 'Efficiency', 'Egg', 'Explorers', 'Greatersword', 'Gymystic', 'Hellishmet', 'Megamace', 'Miners', 'Pantastic', 'Polierarm', 'Potency', 'Scientists', 'Smoldershoulder', 'Speedexplorer', 'Speedfarming', 'Speedlumber', 'Speedminer', 'Speedscience', 'Supershield', 'TrainTacular', 'Trainers', 'Trapstorm', 'UberHut']
         const upgrades = document.getElementById('upgradesHere').children
         for(const upgrade of upgrades) {
-            if(!upgrade_names.includes(upgrade.id)) return
-            if(!upgrade.classList.contains('thingColorCanAfford')) return
+            if(!upgrade_names.includes(upgrade.id)) continue
+            if(!upgrade.classList.contains('thingColorCanAfford')) continue
             console.log(`Click ${upgrade.id}`)
             upgrade.click()
 
