@@ -1,0 +1,19 @@
+{
+  "name": "trimps",
+  "version": "1.0.0",
+  "description": "Trimps Bot",
+  "main": "index.js",
+  "scripts": {
+    "build": "python build.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GauChoob/trimps.git"
+  },
+  "author": "Gau Cho",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/GauChoob/trimps/issues"
+  },
+  "homepage": "https://github.com/GauChoob/trimps"
+}
