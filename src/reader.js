@@ -1,7 +1,7 @@
 window.botreader = {
     check_user_selection: function(data) {
         const buttons = ['foodCollectBtn', 'woodCollectBtn', 'metalCollectBtn', 'scienceCollectBtn', 'trimpsCollectBtn', 'buildingsCollectBtn']
-        const selections = {}
+        const selections = []
         let current_selection = ''
         buttons.forEach(button_name => {
             const button = document.getElementById(button_name)
